@@ -1,6 +1,13 @@
+import unicodedata
+
+
 class Asignatura:
 
     def __init__(self, nom_asign, cant_cred, cost_cred):
+
+        nom_asign = self.remove_accents(nom_asign)
+
+
         if not nom_asign.isalpha():
             raise ValueError("Nombre de asignatura debe ser una cadena de texto")
         if cant_cred < 1:
@@ -14,6 +21,5 @@ class Asignatura:
         self.cost_cred = int(cost_cred)
 
 
-        def registrar_asignatura(self):
-            pass
+        
     
