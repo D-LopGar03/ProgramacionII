@@ -13,4 +13,7 @@ class Asignatura:
         self.cant_cred = int(cant_cred)
         self.cost_cred = int(cost_cred)
 
+
+        def registrar_asignatura(self):
+            pass
     
