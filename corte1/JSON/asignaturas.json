@@ -1,6 +1,12 @@
-{
-    "nombre": "matematicas",
-    "cant_cred": 4,
-    "cost_cred": 1000
-
-}
+[
+    {
+        "nombre": "matematicas",
+        "creditos": 5,
+        "costo_credito": 10.0
+    },
+    {
+        "nombre": "español",
+        "creditos": 10,
+        "costo_credito": 100.0
+    }
+]

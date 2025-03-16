@@ -1,4 +1,12 @@
+#!/usr/bin/env python3
+
 from pyfiles.Asignatura import Asignatura
 
-asign1 = Asignatura()
-asign1.registrar_asignatura()
+while True:
+
+    asignatura = Asignatura()
+    asignatura.registrar_asignatura()
+
+    continuar = input("Desea registrar otra asignatura? (s/n): ")
+    if continuar.lower() != "s":
+        break
