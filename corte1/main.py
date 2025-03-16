@@ -1,9 +1,4 @@
-import Asignatura, Estudiante, ProgramaAcademico
+from pyfiles.Asignatura import Asignatura
 
-estudiante1 = Estudiante.Estudiante("Juan", "M", 20, 3)
-asignatura1 = Asignatura.Asignatura("Matematicas", 3, 100)
-
-
-
-estudiante1.inscribir_asignatura(asignatura1)
-print(estudiante1.asignaturas)
+asign1 = Asignatura()
+asign1.registrar_asignatura()
