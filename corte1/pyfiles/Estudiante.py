@@ -1,33 +1,67 @@
 import Asignatura
 
+
 class Estudiante:
 
     DESCUENTOS = {1:0.50, 2:0.30, 3:0.20}
 
-    def __init__(self, nom_est, gen_est, edad, estr_soc):
-            
-        if not nom_est.isalpha():
-            raise ValueError("Nombre debe ser una cadena de texto")
-        if not gen_est.isalpha():
-            raise ValueError("Genero debe ser una cadena de texto")
-        if  edad < 15:
-            raise ValueError("Edad debe ser un numero")
-        if estr_soc <= 0 or estr_soc >6:
-            raise ValueError("El valor de estrato socioeconómico debe estar entre 1 y 6")
+    def __init__(self):
+        self.nom_est = ""
+        self.edad = 0
+        self.estrato = 0
+        self.genero = ""
+        self.asignaturas = []
 
-        
-        self.nom_est = str(nom_est)
-        self.gen_est = str(gen_est)
-        self.edad = int(edad)
-        self.estr_soc = int(estr_soc)
+    def registrar_estudiante(self):
+        while True:
+            try:
+                self.nom_est = input("Ingrese el nombre del estudiante: ")
+                if not self.nom_est.isalpha():
+                    raise ValueError(
+                        "Nombre del estudiante debe ser una cadena de texto")
+                break
+            except ValueError as e:
+                print(e)
 
-    def calcular_costo_matricula(self, costo_credito, cantidad_creditos):
-        descuento = self.DESCUENTOS.get(self.estrato, 0)
-        total_sin_descuento = costo_credito * cantidad_creditos
-        descuento_aplicado = total_sin_descuento * descuento
-        return total_sin_descuento - descuento_aplicado, descuento_aplicado
+        while True:
+            try:
+                self.edad = int(
+                    input("Ingrese la edad del estudiante: "))
+                if self.edad <= 0:
+                    raise ValueError(
+                        "La edad del estudiante debe ser un número entero positivo mayor de cero")
+                break
+            except ValueError as e:
+                print(e)
 
-    def inscribir_asignatura(self, asignatura):
-        if not isinstance(asignatura, Asignatura):
-            raise ValueError("El objeto asignatura debe ser de la clase Asignatura")
-        self.asignaturas.append(asignatura)
+        while True:
+            try:
+                self.estrato = int(
+                    input("Ingrese el estrato del estudiante: "))
+                if self.estrato <= 0:
+                    raise ValueError(
+                        "El estrato del estudiante debe ser un número entero positivo mayor de cero")
+                break
+            except ValueError as e:
+                print(e)
+
+        while True:
+            try:
+                self.genero = input("Ingrese el género del estudiante (M/F): ")
+                if self.genero.lower() not in ["m", "f"]:
+                    raise ValueError(
+                        "El género del estudiante debe ser 'M' o 'F'")
+                break
+            except ValueError as e:
+                print(e)
+
+        while True:
+            asignatura = Asignatura.Asignatura()
+            asignatura.registrar_asignatura()
+            self.asignaturas.append(asignatura)
+            continuar = input("Desea registrar otra asignatura? (s/n): ")
+            if continuar.lower() != "s":
+                break
+
+
+   

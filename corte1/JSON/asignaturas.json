@@ -1,12 +1,8 @@
 [
     {
-        "nombre": "matematicas",
+        "nombre": "matemáticas",
         "creditos": 5,
-        "costo_credito": 10.0
-    },
-    {
-        "nombre": "español",
-        "creditos": 10,
-        "costo_credito": 100.0
+        "costo_credito": 200000.0,
+        "valor_total": 1000000.0
     }
 ]

@@ -19,31 +19,26 @@ class Asignatura:
                 break
             except ValueError as e:
                 print(e)
+
         while True:
             try:
                 self.cant_cred = int(
                     input("Ingrese la cantidad de créditos de la asignatura: "))
-                if self.cant_cred <= 0:
-                    raise ValueError(
-                        "La cantidad de créditos debe ser un número entero positivo mayor de cero")
-                break
-            except ValueError as e:
-                print(e)
-        while True:
-            try:
                 self.cost_cred = float(
                     input("Ingrese el costo de cada crédito: "))
-                if self.cost_cred <= 0:
+
+                if self.cant_cred <= 0 or self.cant_cred <= 0:
                     raise ValueError(
-                        "El costo de cada crédito debe ser un número positivo mayor de cero")
+                        "La cantidad de créditos o el costo de cada uno debe ser un número entero positivo mayor de cero")
                 break
             except ValueError as e:
-                print(e)
+                print("Ingrese un dato válido para este campo")
 
         nueva_asignatura = {
             "nombre": self.nom_asign,
             "creditos": self.cant_cred,
-            "costo_credito": self.cost_cred
+            "costo_credito": self.cost_cred,
+            "valor_total": self.cant_cred*self.cost_cred
         }
 
         asignaturas = asignatura_json.cargar_asignaturas()
