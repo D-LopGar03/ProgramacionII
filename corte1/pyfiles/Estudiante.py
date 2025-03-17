@@ -1,9 +1,13 @@
+""" from pyfiles import Gestor_Json
+
 import Asignatura
 
 
 class Estudiante:
 
     DESCUENTOS = {1:0.50, 2:0.30, 3:0.20}
+
+
 
     def __init__(self):
         self.nom_est = ""
@@ -27,9 +31,9 @@ class Estudiante:
             try:
                 self.edad = int(
                     input("Ingrese la edad del estudiante: "))
-                if self.edad <= 0:
+                if self.edad <= 11:
                     raise ValueError(
-                        "La edad del estudiante debe ser un número entero positivo mayor de cero")
+                        "El estudiante debe de tener como mínimo 12 años")
                 break
             except ValueError as e:
                 print(e)
@@ -38,9 +42,9 @@ class Estudiante:
             try:
                 self.estrato = int(
                     input("Ingrese el estrato del estudiante: "))
-                if self.estrato <= 0:
+                if self.estrato <= 0 or self.estrato > 6:
                     raise ValueError(
-                        "El estrato del estudiante debe ser un número entero positivo mayor de cero")
+                        "El estrato del estudiante debe ser un número entero positivo entre 1 y 6")
                 break
             except ValueError as e:
                 print(e)
@@ -55,13 +59,11 @@ class Estudiante:
             except ValueError as e:
                 print(e)
 
-        while True:
-            asignatura = Asignatura.Asignatura()
-            asignatura.registrar_asignatura()
-            self.asignaturas.append(asignatura)
-            continuar = input("Desea registrar otra asignatura? (s/n): ")
-            if continuar.lower() != "s":
-                break
+        def calcular_descuento(estrato):
+            if estrato in self.DESCUENTOS:
+                return self.DESCUENTOS[estrato]
+            return 0
 
 
-   
+
+    """
