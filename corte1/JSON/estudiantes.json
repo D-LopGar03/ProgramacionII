@@ -2,28 +2,40 @@
     {
         "documento": "1234",
         "nombre": "pedro",
-        "edad": 43,
-        "estrato": 1,
-        "genero": "m",
-        "asignatura": "asignatura",
-        "descuento": 24.0
-    },
-    {
-        "documento": "12345",
-        "nombre": "carlos",
-        "edad": 23,
-        "estrato": 1,
-        "genero": "m",
-        "asignatura": "asignatura",
-        "descuento": 40.0
-    },
-    {
-        "documento": "1",
-        "nombre": "pepe",
-        "edad": 32,
-        "estrato": 1,
+        "edad": 12,
+        "estrato": 5,
         "genero": "m",
         "asignatura": "matematicas",
-        "descuento": 40.0
+        "valor_pagar": 200000.0
+    },
+
+    {
+        "documento": "1235",
+        "nombre": "juan",
+        "edad": 12,
+        "estrato": 5,
+        "genero": "m",
+        "asignatura": "ingles",
+        "valor_pagar": 200000.0
+    },
+
+    {
+        "documento": "1236",
+        "nombre": "maria",
+        "edad": 12,
+        "estrato": 5,
+        "genero": "f",
+        "asignatura": "matematicas",
+        "valor_pagar": 300000.0
+    },
+
+    {
+        "documento": "16736",
+        "nombre": "carla",
+        "edad": 12,
+        "estrato": 5,
+        "genero": "f",
+        "asignatura": "matematicas",
+        "valor_pagar": 300000.0
     }
 ]

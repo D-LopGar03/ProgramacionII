@@ -10,5 +10,11 @@
         "creditos": 4,
         "costo_credito": 20.0,
         "valor_total": 80.0
+    },
+    {
+        "nombre": "ingles",
+        "creditos": 4,
+        "costo_credito": 50000.0,
+        "valor_total": 200000.0
     }
 ]

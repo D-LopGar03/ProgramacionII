@@ -13,7 +13,7 @@ class Estudiante:
         self.edad = 0
         self.estrato = 0
         self.genero = ""
-        self.asignaturas = []
+        self.asignaturas = ""
 
     def check_estudiante(self, documento):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -29,16 +29,16 @@ class Estudiante:
         descuento = gestor_descuento.load_file()
         for desc in descuento:
             if estrato == 1:
-                desc_total = desc["valor_total"] * 0.50
-                print("Descuento: ", desc_total)
+                valor_pagar = desc["valor_total"] * 0.50
+                print("Descuento: ", valor_pagar)
             elif estrato == 2:
-                desc_total = desc["valor_total"] * 0.30
-                print("Descuento: ", desc_total)
+                valor_pagar = desc["valor_total"] * 0.30
+                print("Descuento: ", valor_pagar)
             elif estrato == 3:
                 return desc["valor_total"] * 0.20
             else:
-                desc_total = 0
-        return desc_total
+                valor_pagar = desc["valor_total"]
+        return valor_pagar
 
     def registrar_estudiante(self):
         while True:
@@ -116,7 +116,7 @@ class Estudiante:
             "estrato": self.estrato,
             "genero": self.genero,
             "asignatura": self.asignaturas,
-            "descuento": self.aplicar_descuento(self.estrato)
+            "valor_pagar": self.aplicar_descuento(self.estrato)
         }
 
         gestor_estudiantes = Gestor_Json(path_estudiantes)

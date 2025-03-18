@@ -27,7 +27,6 @@ class Asignatura:
                 conteo_asignaturas[estudiante["asignatura"]] = 1
             else:
                 conteo_asignaturas[estudiante["asignatura"]] += 1
-           
 
         print("Informe de asignaturas:")
         for asignatura, cantidad in conteo_asignaturas.items():
@@ -42,6 +41,28 @@ class Asignatura:
                 return True
         return False
 
+    def mayor_valor_asignatura():
+        gestor_estudiantes = Gestor_Json(path_estudiantes)
+        estudiantes = gestor_estudiantes.load_file()
+
+        conteo_asignaturas = {}
+
+        for estudiante in estudiantes:
+            if estudiante["asignatura"] not in conteo_asignaturas:
+                conteo_asignaturas[estudiante["asignatura"]] = 1
+                conteo_asignaturas[estudiante["asignatura"]] = estudiante["valor_pagar"]
+            else:
+                conteo_asignaturas[estudiante["asignatura"]] += 0
+                conteo_asignaturas[estudiante["asignatura"]] += estudiante["valor_pagar"]
+        
+        mayor_valor = 0
+        asignatura_mayor = ""
+        for asignatura, cantidad in conteo_asignaturas.items():
+            if cantidad > mayor_valor:
+                mayor_valor = cantidad
+                asignatura_mayor = asignatura
+        print(f"La asignatura con mayor valor recaudado es {asignatura_mayor} con un total de {mayor_valor}")
+        
     def registrar_asignatura(self):
         while True:
             try:
