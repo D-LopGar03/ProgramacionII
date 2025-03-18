@@ -1,7 +1,6 @@
 from pyfiles.Gestor_Json import Gestor_Json
 import unidecode
 
-global path_asignaturas
 path_asignaturas = "JSON/asignaturas.json"
 
 
@@ -68,3 +67,5 @@ class Asignatura:
         gestor_asignaturas.save_file(asignaturas)
 
         print("Asignatura registrada exitosamente")
+
+        return self.nom_asign

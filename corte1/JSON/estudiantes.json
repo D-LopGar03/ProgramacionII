@@ -1,1 +1,24 @@
-[]
+[
+    {
+        "documento": "1234",
+        "nombre": "pedro",
+        "edad": 23,
+        "estrato": 1,
+        "genero": "M",
+        "asignatura": [
+            "programacion"
+        ],
+        "descuento": null
+    },
+    {
+        "documento": "12345678",
+        "nombre": "carlos",
+        "edad": 23,
+        "estrato": 1,
+        "genero": "m",
+        "asignatura": [
+            "programacion"
+        ],
+        "descuento": null
+    }
+]

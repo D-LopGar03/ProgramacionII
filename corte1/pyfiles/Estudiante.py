@@ -1,22 +1,55 @@
-""" from pyfiles import Gestor_Json
+from pyfiles.Gestor_Json import Gestor_Json
+from pyfiles.Asignatura import Asignatura
 
-import Asignatura
+path_estudiantes = "JSON/estudiantes.json"
+path_asignaturas = "JSON/asignaturas.json"
 
 
 class Estudiante:
 
-    DESCUENTOS = {1:0.50, 2:0.30, 3:0.20}
-
-
+    DESCUENTOS = {1: 0.50, 2: 0.30, 3: 0.20}
 
     def __init__(self):
+        self.doc = 0
         self.nom_est = ""
         self.edad = 0
         self.estrato = 0
         self.genero = ""
         self.asignaturas = []
 
+    def check_estudiante(self, documento):
+        gestor_estudiantes = Gestor_Json(path_estudiantes)
+        estudiantes = gestor_estudiantes.load_file()
+        for estudiante in estudiantes:
+            if estudiante["documento"] == documento:
+                return True
+        return False
+
+    def aplicar_descuento(self, estrato):
+
+        gestor_descuento = Gestor_Json(path_asignaturas)
+        descuento = gestor_descuento.load_file()
+        for desc in descuento:
+            if estrato == 1:
+                print("Descuento: ", desc["valor_total"] * 0.50)
+            elif estrato == 2:
+                return desc["valor_total"] * 0.30
+            elif estrato == 3:
+                return desc["valor_total"] * 0.20
+
     def registrar_estudiante(self):
+        while True:
+            try:
+                self.doc = input("Ingrese el documento del estudiante: ")
+                if not self.doc.isdigit():
+                    raise ValueError(
+                        "Documento del estudiante debe ser un número")
+                if self.check_estudiante(self.doc):
+                    raise ValueError(
+                        "El estudiante ya se encuentra registrado")
+                break
+            except ValueError as e:
+                print(e)
         while True:
             try:
                 self.nom_est = input("Ingrese el nombre del estudiante: ")
@@ -59,11 +92,32 @@ class Estudiante:
             except ValueError as e:
                 print(e)
 
-        def calcular_descuento(estrato):
-            if estrato in self.DESCUENTOS:
-                return self.DESCUENTOS[estrato]
-            return 0
+        while True:
+            try:
+                obj_asignatura = Asignatura()
+                asignatura = input("Ingrese el nombre de la asignatura: ")
+                if not obj_asignatura.check_asignatura(asignatura):
+                    print("La asignatura no se encuentra registrada, regístrela ahora")
+                    obj_asignatura.registrar_asignatura()
 
+                self.asignaturas.append(asignatura)
+                break
 
+            except ValueError as e:
+                print(e)
 
-    """
+        nuevo_estudiante = {
+            "documento": self.doc,
+            "nombre": self.nom_est,
+            "edad": self.edad,
+            "estrato": self.estrato,
+            "genero": self.genero,
+            "asignatura": self.asignaturas,
+            "descuento": self.aplicar_descuento(self.estrato)
+        }
+
+        gestor_estudiantes = Gestor_Json(path_estudiantes)
+        estudiantes = gestor_estudiantes.load_file()
+        estudiantes.append(nuevo_estudiante)
+        gestor_estudiantes.save_file(estudiantes)
+        print("Estudiante registrado exitosamente")
