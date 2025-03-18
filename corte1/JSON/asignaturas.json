@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "nombre": "sancochoi",
+        "creditos": 4,
+        "costo_credito": 12.0,
+        "valor_total": 48.0
+    },
+    {
+        "nombre": "asignatura",
+        "creditos": 4,
+        "costo_credito": 20.0,
+        "valor_total": 80.0
+    }
+]

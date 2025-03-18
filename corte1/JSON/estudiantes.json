@@ -2,23 +2,28 @@
     {
         "documento": "1234",
         "nombre": "pedro",
-        "edad": 23,
+        "edad": 43,
         "estrato": 1,
-        "genero": "M",
-        "asignatura": [
-            "programacion"
-        ],
-        "descuento": null
+        "genero": "m",
+        "asignatura": "asignatura",
+        "descuento": 24.0
     },
     {
-        "documento": "12345678",
+        "documento": "12345",
         "nombre": "carlos",
         "edad": 23,
         "estrato": 1,
         "genero": "m",
-        "asignatura": [
-            "programacion"
-        ],
-        "descuento": null
+        "asignatura": "asignatura",
+        "descuento": 40.0
+    },
+    {
+        "documento": "1",
+        "nombre": "pepe",
+        "edad": 32,
+        "estrato": 1,
+        "genero": "m",
+        "asignatura": "matematicas",
+        "descuento": 40.0
     }
 ]

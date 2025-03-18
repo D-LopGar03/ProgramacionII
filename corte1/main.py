@@ -24,7 +24,8 @@ def main():
                 estudiante = Estudiante()
                 estudiante.registrar_estudiante()
             elif opcion == 3:
-                pass
+
+                Asignatura.generar_informe_asignaturas()
             elif opcion == 4:
                 pass
             elif opcion == 5:

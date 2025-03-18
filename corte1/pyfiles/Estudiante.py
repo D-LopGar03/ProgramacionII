@@ -7,8 +7,6 @@ path_asignaturas = "JSON/asignaturas.json"
 
 class Estudiante:
 
-    DESCUENTOS = {1: 0.50, 2: 0.30, 3: 0.20}
-
     def __init__(self):
         self.doc = 0
         self.nom_est = ""
@@ -31,11 +29,16 @@ class Estudiante:
         descuento = gestor_descuento.load_file()
         for desc in descuento:
             if estrato == 1:
-                print("Descuento: ", desc["valor_total"] * 0.50)
+                desc_total = desc["valor_total"] * 0.50
+                print("Descuento: ", desc_total)
             elif estrato == 2:
-                return desc["valor_total"] * 0.30
+                desc_total = desc["valor_total"] * 0.30
+                print("Descuento: ", desc_total)
             elif estrato == 3:
                 return desc["valor_total"] * 0.20
+            else:
+                desc_total = 0
+        return desc_total
 
     def registrar_estudiante(self):
         while True:
