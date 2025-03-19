@@ -29,9 +29,10 @@ class Asignatura:
             else:
                 conteo_asignaturas[estudiante["asignatura"]] += 1
 
-        print("Informe de asignaturas:")
+        print(Fore.GREEN+"\nInforme de asignaturas:\n" + Style.RESET_ALL)
         for asignatura, cantidad in conteo_asignaturas.items():
-            print(f"{asignatura}: {cantidad}")
+            print(Fore.YELLOW + f"{asignatura}: {cantidad}" + Style.RESET_ALL)
+        print("\n")
 
     def check_asignatura(self, nombre):
 
@@ -56,7 +57,7 @@ class Asignatura:
                 valor_credito += asignatura["costo_credito"]
 
         print(
-            f"El valor promedio por crédito es: {valor_credito/cantidad_asign}")
+           Fore.GREEN + f"El valor promedio por crédito es: {valor_credito/cantidad_asign}" + Style.RESET_ALL)
 
     def descuento_estrato(self):
 
@@ -70,6 +71,7 @@ class Asignatura:
                         "El rango del estrato debe de estar entre 1 y 3")
 
                 estudiante = Gestor_Json(path_estudiantes)
+                estudiante = estudiante.load_file()
 
                 valor_total_descuento = 0
 
@@ -79,10 +81,10 @@ class Asignatura:
 
                         valor_total_descuento += estrato["valor_pagar"]
                 print(
-                    f"El valor total de todos los decuntos para el estrato {self.estrato} es: {valor_total_descuento}")
+                   Fore.GREEN + f"El valor total de todos los decuntos para el estrato {self.estrato} es: {valor_total_descuento}" + Style.RESET_ALL)
                 break
             except ValueError as e:
-                print("Ingrese un dato válido para este campo")
+                print(Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
 
     def cantidad_estudiantes_estrato1(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -95,7 +97,7 @@ class Asignatura:
                 cantidad_estudiantes += 1
 
         print(
-            f"La cantidad de estudiantes con estrato 1 es: {cantidad_estudiantes}")
+           Fore.GREEN + f"La cantidad de estudiantes con estrato 1 es: {cantidad_estudiantes}" + Style.RESET_ALL)
 
     def total_ingresos(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -105,7 +107,7 @@ class Asignatura:
 
         for estudiante in estudiantes:
             valor_total += estudiante["valor_pagar"]
-        print(f"El valor total recaudado es: {valor_total}")
+        print(Fore.GREEN + f"El valor total recaudado es: {valor_total}" + Style.RESET_ALL)
 
     def mayor_valor_asignatura(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -129,13 +131,13 @@ class Asignatura:
                 mayor_valor = cantidad
                 asignatura_mayor = asignatura
         print(
-            f"La asignatura con mayor valor recaudado es {asignatura_mayor} con un total de {mayor_valor}")
+           Fore.GREEN + f"La asignatura con mayor valor recaudado es {asignatura_mayor} con un total de {mayor_valor}" + Style.RESET_ALL)
 
     def registrar_asignatura(self):
         while True:
             try:
                 self.nom_asign = input(
-                    "Ingrese el nombre de la asignatura o 'Q' para regresar al menú principal: ")
+                    "Ingrese el nombre de la asignatura: ")
                 self.nom_asign = self.normalizar_nombre(self.nom_asign)
 
                 if self.nom_asign.lower() == "q":
@@ -143,10 +145,10 @@ class Asignatura:
 
                 if not self.nom_asign.isalpha():
                     raise ValueError(
-                        "Nombre de la asignatura debe ser una cadena de texto")
+                       Fore.RED + "Nombre de la asignatura debe ser una cadena de texto" + Style.RESET_ALL)
                 if self.check_asignatura(self.nom_asign):
                     raise ValueError(
-                        "La asignatura ya se encuentra registrada")
+                       Fore.GREEN + "La asignatura ya se encuentra registrada" + Style.RESET_ALL)
 
                 break
             except ValueError as e:
@@ -161,10 +163,11 @@ class Asignatura:
 
                 if self.cant_cred <= 0 or self.cost_cred <= 0:
                     raise ValueError(
-                        "La cantidad de créditos o el costo de cada uno debe ser un número entero positivo mayor de cero")
+                        Fore.YELLOW + "La cantidad de créditos o el costo de cada uno debe ser un número entero positivo mayor de cero" + Style.RESET_ALL)
                 break
             except ValueError as e:
-                print("Ingrese un dato válido para este campo")
+                print(
+                    Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
 
         nueva_asignatura = {
             "nombre": self.nom_asign,
@@ -178,6 +181,6 @@ class Asignatura:
         asignaturas.append(nueva_asignatura)
         gestor_asignaturas.save_file(asignaturas)
 
-        print("Asignatura registrada exitosamente")
+        print(Fore.GREEN + "Asignatura registrada exitosamente" + Style.RESET_ALL)
 
         return self.nom_asign

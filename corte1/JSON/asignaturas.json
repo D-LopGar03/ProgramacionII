@@ -22,5 +22,23 @@
         "creditos": 4,
         "costo_credito": 20000.0,
         "valor_total": 80000.0
+    },
+    {
+        "nombre": "espanol",
+        "creditos": 4,
+        "costo_credito": 56000.0,
+        "valor_total": 224000.0
+    },
+    {
+        "nombre": "desarrollo",
+        "creditos": 90,
+        "costo_credito": 10.0,
+        "valor_total": 900.0
+    },
+    {
+        "nombre": "matematicas",
+        "creditos": 5,
+        "costo_credito": 20000.0,
+        "valor_total": 100000.0
     }
 ]

@@ -1,41 +1,11 @@
 [
     {
         "documento": "1234",
-        "nombre": "pedro",
-        "edad": 12,
-        "estrato": 5,
+        "nombre": "carloszapata",
+        "edad": 32,
+        "estrato": 2,
         "genero": "m",
         "asignatura": "matematicas",
-        "valor_pagar": 200000.0
-    },
-
-    {
-        "documento": "1235",
-        "nombre": "juan",
-        "edad": 12,
-        "estrato": 5,
-        "genero": "m",
-        "asignatura": "ingles",
-        "valor_pagar": 200000.0
-    },
-
-    {
-        "documento": "1236",
-        "nombre": "maria",
-        "edad": 12,
-        "estrato": 5,
-        "genero": "f",
-        "asignatura": "matematicas",
-        "valor_pagar": 300000.0
-    },
-
-    {
-        "documento": "16736",
-        "nombre": "carla",
-        "edad": 12,
-        "estrato": 5,
-        "genero": "f",
-        "asignatura": "matematicas",
-        "valor_pagar": 300000.0
+        "valor_pagar": 30000.0
     }
 ]

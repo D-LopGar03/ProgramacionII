@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 from pyfiles.Asignatura import Asignatura
 from pyfiles.Estudiante import Estudiante
+from colorama import Fore, Style
+
+
+print(Fore.GREEN + "Bienvenido al sistema de registro de estudiantes" + Style.RESET_ALL)
 
 
 def main():
@@ -20,7 +24,8 @@ def main():
         print("9. Salir")
 
         try:
-            opcion = int(input("Ingrese la opción deseada: "))
+            opcion = int(
+                input(Fore.GREEN + "Ingrese la opción deseada: " + Style.RESET_ALL))
             if opcion == 1:
 
                 asignatura.registrar_asignatura()
@@ -44,13 +49,13 @@ def main():
                 asignatura.cantidad_estudiantes_estrato1()
             elif opcion == 8:
                 asignatura = Asignatura()
-                asignatura.dinero_recaudado_total()
+                asignatura.total_ingresos()
             elif opcion == 9:
                 break
             else:
                 raise ValueError("Opción no válida")
-        except ValueError as e:
-            print(e)
+        except ValueError:
+            print(Fore.RED + "Ingrese un valor entre 1 y 9..." + Style.RESET_ALL)
 
 
 if __name__ == "__main__":

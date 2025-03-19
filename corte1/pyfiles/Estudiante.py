@@ -1,5 +1,6 @@
 from pyfiles.Gestor_Json import Gestor_Json
 from pyfiles.Asignatura import Asignatura
+from colorama import Fore, Style
 
 path_estudiantes = "JSON/estudiantes.json"
 path_asignaturas = "JSON/asignaturas.json"
@@ -30,10 +31,10 @@ class Estudiante:
         for desc in descuento:
             if estrato == 1:
                 valor_pagar = desc["valor_total"] * 0.50
-                print("Descuento: ", valor_pagar)
+
             elif estrato == 2:
                 valor_pagar = desc["valor_total"] * 0.30
-                print("Descuento: ", valor_pagar)
+
             elif estrato == 3:
                 return desc["valor_total"] * 0.20
             else:
@@ -58,7 +59,7 @@ class Estudiante:
                 self.nom_est = input("Ingrese el nombre del estudiante: ")
                 if not self.nom_est.isalpha():
                     raise ValueError(
-                        "Nombre del estudiante debe ser una cadena de texto")
+                        Fore.RED + "Nombre del estudiante debe ser una cadena de texto" + Style.RESET_ALL)
                 break
             except ValueError as e:
                 print(e)
@@ -69,7 +70,7 @@ class Estudiante:
                     input("Ingrese la edad del estudiante: "))
                 if self.edad <= 11:
                     raise ValueError(
-                        "El estudiante debe de tener como mínimo 12 años")
+                       Fore.RED + "El estudiante debe de tener como mínimo 12 años" + Style.RESET_ALL)
                 break
             except ValueError as e:
                 print(e)
@@ -80,7 +81,7 @@ class Estudiante:
                     input("Ingrese el estrato del estudiante: "))
                 if self.estrato <= 0 or self.estrato > 6:
                     raise ValueError(
-                        "El estrato del estudiante debe ser un número entero positivo entre 1 y 6")
+                       Fore.RED + "El estrato del estudiante debe ser un número entero positivo entre 1 y 6" + Style.RESET_ALL)
                 break
             except ValueError as e:
                 print(e)
@@ -90,7 +91,7 @@ class Estudiante:
                 self.genero = input("Ingrese el género del estudiante (M/F): ")
                 if self.genero.lower() not in ["m", "f"]:
                     raise ValueError(
-                        "El género del estudiante debe ser 'M' o 'F'")
+                       Fore.RED + "El género del estudiante debe ser 'M' o 'F'" + Style.RESET_ALL)
                 break
             except ValueError as e:
                 print(e)
@@ -99,11 +100,12 @@ class Estudiante:
             try:
                 obj_asignatura = Asignatura()
                 asignatura = input("Ingrese el nombre de la asignatura: ")
+                asignatura = obj_asignatura.normalizar_nombre(asignatura)
+                self.asignaturas = asignatura
                 if not obj_asignatura.check_asignatura(asignatura):
-                    print("La asignatura no se encuentra registrada, regístrela ahora")
+                    print(Fore.RED + "La asignatura no se encuentra registrada, regístrela ahora" + Style.RESET_ALL)
                     obj_asignatura.registrar_asignatura()
 
-                self.asignaturas.append(asignatura)
                 break
 
             except ValueError as e:
@@ -123,4 +125,4 @@ class Estudiante:
         estudiantes = gestor_estudiantes.load_file()
         estudiantes.append(nuevo_estudiante)
         gestor_estudiantes.save_file(estudiantes)
-        print("Estudiante registrado exitosamente")
+        print(Fore.GREEN + "Estudiante registrado exitosamente" + Style.RESET_ALL)
