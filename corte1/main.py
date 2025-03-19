@@ -29,7 +29,7 @@ def main():
                 estudiante.registrar_estudiante()
             elif opcion == 3:
                 asignatura = Asignatura()
-                asignatura.generar_informe_asignaturas()
+                asignatura.cantidad_estudiantes_asignaturas()
             elif opcion == 4:
                 asignatura = Asignatura()
                 asignatura.valor_promedio_cred()
