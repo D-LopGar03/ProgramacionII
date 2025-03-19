@@ -40,5 +40,11 @@
         "creditos": 5,
         "costo_credito": 20000.0,
         "valor_total": 100000.0
+    },
+    {
+        "nombre": "sancochoii",
+        "creditos": 4,
+        "costo_credito": 20000.0,
+        "valor_total": 80000.0
     }
 ]

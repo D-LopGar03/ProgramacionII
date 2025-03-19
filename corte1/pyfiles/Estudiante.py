@@ -36,7 +36,7 @@ class Estudiante:
                 valor_pagar = desc["valor_total"] * 0.30
 
             elif estrato == 3:
-                return desc["valor_total"] * 0.20
+                valor_pagar = desc["valor_total"] * 0.20
             else:
                 valor_pagar = desc["valor_total"]
         return valor_pagar
@@ -47,7 +47,7 @@ class Estudiante:
                 self.doc = input("Ingrese el documento del estudiante: ")
                 if not self.doc.isdigit():
                     raise ValueError(
-                        "Documento del estudiante debe ser un número")
+                       Fore.RED + "Documento del estudiante debe ser un número" + Style.RESET_ALL)
                 if self.check_estudiante(self.doc):
                     raise ValueError(
                         "El estudiante ya se encuentra registrado")
