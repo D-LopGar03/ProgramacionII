@@ -16,5 +16,11 @@
         "creditos": 4,
         "costo_credito": 50000.0,
         "valor_total": 200000.0
+    },
+    {
+        "nombre": "desarrolloi",
+        "creditos": 4,
+        "costo_credito": 20000.0,
+        "valor_total": 80000.0
     }
 ]

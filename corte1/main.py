@@ -4,6 +4,9 @@ from pyfiles.Estudiante import Estudiante
 
 
 def main():
+    asignatura = Asignatura()
+    estudiante = Estudiante()
+
     while True:
         print("Menú de opciones")
         print("1. Registrar asignatura")
@@ -19,23 +22,29 @@ def main():
         try:
             opcion = int(input("Ingrese la opción deseada: "))
             if opcion == 1:
-                asignatura = Asignatura()
+
                 asignatura.registrar_asignatura()
             elif opcion == 2:
-                estudiante = Estudiante()
+
                 estudiante.registrar_estudiante()
             elif opcion == 3:
-                Asignatura.generar_informe_asignaturas()
+                asignatura = Asignatura()
+                asignatura.generar_informe_asignaturas()
             elif opcion == 4:
-                pass
+                asignatura = Asignatura()
+                asignatura.valor_promedio_cred()
             elif opcion == 5:
-                Asignatura.mayor_valor_asignatura()
+                asignatura = Asignatura()
+                asignatura.mayor_valor_asignatura()
             elif opcion == 6:
-                pass
+                asignatura = Asignatura()
+                asignatura.descuento_estrato()
             elif opcion == 7:
-                pass
+                asignatura = Asignatura()
+                asignatura.cantidad_estudiantes_estrato1()
             elif opcion == 8:
-                pass
+                asignatura = Asignatura()
+                asignatura.dinero_recaudado_total()
             elif opcion == 9:
                 break
             else:

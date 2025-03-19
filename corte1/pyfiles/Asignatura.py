@@ -16,7 +16,7 @@ class Asignatura:
         nombre = unidecode.unidecode(nombre)
         return nombre.lower()
 
-    def generar_informe_asignaturas():
+    def generar_informe_asignaturas(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
         estudiantes = gestor_estudiantes.load_file()
 
@@ -40,8 +40,72 @@ class Asignatura:
             if self.normalizar_nombre(asignatura["nombre"]) == nombre:
                 return True
         return False
+    
+    def valor_promedio_cred(self):
 
-    def mayor_valor_asignatura():
+        gestor_asignaturas = Gestor_Json(path_asignaturas)
+        asignaturas = gestor_asignaturas.load_file()
+
+        cantidad_asign = 0
+        valor_credito = 0
+
+        for asignatura in asignaturas:
+            if asignatura["nombre"]:
+                cantidad_asign += 1
+                valor_credito += asignatura["costo_credito"]
+             
+        print(f"El valor promedio por crédito es: {valor_credito/cantidad_asign}")
+        
+    def descuento_estrato(self):
+
+        while True:
+            try:
+                self.estrato = int(
+                    input("Ingrese el estrato a consultar (1, 2 o 3): "))
+                
+                if self.estrato < 1 or self.estrato > 3:
+                    raise ValueError(
+                        "El rango del estrato debe de estar entre 1 y 3")
+
+                estudiante = Gestor_Json(path_estudiantes)
+
+                valor_total_descuento = 0
+
+                for estrato in estudiante:
+
+                    if estrato["estrato"] == self.estrato:
+
+                        valor_total_descuento += estrato["valor_pagar"]                          
+                print(f"El valor total de todos los decuntos para el estrato {self.estrato} es: {valor_total_descuento}")
+                break
+            except ValueError as e:
+                print("Ingrese un dato válido para este campo")
+                
+    def cantidad_estudiantes_estrato1(self):
+        gestor_estudiantes = Gestor_Json(path_estudiantes)
+        estudiantes = gestor_estudiantes.load_file()
+
+        cantidad_estudiantes = 0
+
+        for estudiante in estudiantes:
+            if estudiante["estrato"] == 1:
+                cantidad_estudiantes += 1
+
+        print(f"La cantidad de estudiantes con estrato 1 es: {cantidad_estudiantes}")
+
+
+    def total_ingresos(self):
+        gestor_estudiantes = Gestor_Json(path_estudiantes)
+        estudiantes = gestor_estudiantes.load_file()
+
+        valor_total = 0
+
+        for estudiante in estudiantes:
+            valor_total += estudiante["valor_pagar"]
+        print(f"El valor total recaudado es: {valor_total}")
+
+
+    def mayor_valor_asignatura(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
         estudiantes = gestor_estudiantes.load_file()
 
