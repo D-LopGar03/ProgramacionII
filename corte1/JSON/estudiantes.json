@@ -1,0 +1,44 @@
+[
+    {
+        "documento": "10122",
+        "nombre": "pedro",
+        "edad": 21,
+        "estrato": 3,
+        "genero": "m",
+        "asignatura": "ingles",
+        "valor_pagar": 310000.0
+    }
+]
+
+
+
+gesto_asign = Gestor_Json(path_asignaturas)
+asignatura = gesto_asign.load_file()
+
+cant_asign_sem = {}
+
+sem_uno = 0
+sem_dos = 0
+
+for asign in asignatura:
+    if asign["semestre"] not in cant_asign_sem:
+        cant_asign_sem[asign["semestre"]] = 1
+    else:
+        cant_asign_sem[asign["semestre"]] += 1
+
+for asign in asignatura:
+    if asign["semestre"] == 1:
+        sem_uno += asign["valor_total"]
+    elif asign["semestre"] == 2:
+        sem_dos += asign["valor_total"]
+    else:
+        print("Datos no encontrados")
+
+print(Fore.GREEN+"\nInforme por semestres:\n" + Style.RESET_ALL)
+for asignatura, cantidad in cant_asign_sem.items():
+
+    print(Fore.YELLOW + f"Semestre {asignatura}: {cantidad} " + Style.RESET_ALL)
+print("\n")
+
+print(f"Total recuadado para semestre 1: {sem_uno}")
+print(f"Total recuadado para semestre 2: {sem_dos}")

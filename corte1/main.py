@@ -21,7 +21,8 @@ def main():
         print("6. Valor total de descuento por estrato (1, 2 o 3)")
         print("7. Cantidad de estudiantes por estrato 1")
         print("8. Cantidad de dinero recaudado en total")
-        print("9. Salir")
+        print("9. Asignaturas por semestre y valor recaudado")
+        print("0. Salor")
 
         try:
             opcion = int(
@@ -51,7 +52,8 @@ def main():
                 asignatura = Asignatura()
                 asignatura.total_ingresos()
             elif opcion == 9:
-                break
+                asignatura = Asignatura()
+                asignatura.cantidad_semestre_asign()
             else:
                 raise ValueError("Opción no válida")
         except ValueError:

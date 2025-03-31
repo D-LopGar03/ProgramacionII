@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "nombre": "ingles",
+        "creditos": 4,
+        "costo_credito": 35000.0,
+        "valor_total": 140000.0,
+        "semestre": 1
+    },
+    {
+        "nombre": "inglesii",
+        "creditos": 4,
+        "costo_credito": 35000.0,
+        "valor_total": 1550000.0,
+        "semestre": 2
+    }
+]

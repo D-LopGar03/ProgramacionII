@@ -12,6 +12,7 @@ class Asignatura:
         self.nom_asign = ""
         self.cant_cred = 0
         self.cost_cred = 0
+        self.semestre = 0
 
     def normalizar_nombre(self, nombre):
         nombre = unidecode.unidecode(nombre)
@@ -33,6 +34,9 @@ class Asignatura:
         for asignatura, cantidad in conteo_asignaturas.items():
             print(Fore.YELLOW + f"{asignatura}: {cantidad}" + Style.RESET_ALL)
         print("\n")
+
+   
+
 
     def check_asignatura(self, nombre):
 
@@ -57,7 +61,7 @@ class Asignatura:
                 valor_credito += asignatura["costo_credito"]
 
         print(
-           Fore.GREEN + f"El valor promedio por crédito es: {valor_credito/cantidad_asign}" + Style.RESET_ALL)
+            Fore.GREEN + f"El valor promedio por crédito es: {valor_credito/cantidad_asign}" + Style.RESET_ALL)
 
     def descuento_estrato(self):
 
@@ -81,10 +85,11 @@ class Asignatura:
 
                         valor_total_descuento += estrato["valor_pagar"]
                 print(
-                   Fore.GREEN + f"El valor total de todos los decuntos para el estrato {self.estrato} es: {valor_total_descuento}" + Style.RESET_ALL)
+                    Fore.GREEN + f"El valor total de todos los decuntos para el estrato {self.estrato} es: {valor_total_descuento}" + Style.RESET_ALL)
                 break
             except ValueError as e:
-                print(Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
+                print(
+                    Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
 
     def cantidad_estudiantes_estrato1(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -97,7 +102,7 @@ class Asignatura:
                 cantidad_estudiantes += 1
 
         print(
-           Fore.GREEN + f"La cantidad de estudiantes con estrato 1 es: {cantidad_estudiantes}" + Style.RESET_ALL)
+            Fore.GREEN + f"La cantidad de estudiantes con estrato 1 es: {cantidad_estudiantes}" + Style.RESET_ALL)
 
     def total_ingresos(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -107,7 +112,8 @@ class Asignatura:
 
         for estudiante in estudiantes:
             valor_total += estudiante["valor_pagar"]
-        print(Fore.GREEN + f"El valor total recaudado es: {valor_total}" + Style.RESET_ALL)
+        print(Fore.GREEN +
+              f"El valor total recaudado es: {valor_total}" + Style.RESET_ALL)
 
     def mayor_valor_asignatura(self):
         gestor_estudiantes = Gestor_Json(path_estudiantes)
@@ -131,7 +137,7 @@ class Asignatura:
                 mayor_valor = cantidad
                 asignatura_mayor = asignatura
         print(
-           Fore.GREEN + f"La asignatura con mayor valor recaudado es {asignatura_mayor} con un total de {mayor_valor}" + Style.RESET_ALL)
+            Fore.GREEN + f"La asignatura con mayor valor recaudado es {asignatura_mayor} con un total de {mayor_valor}" + Style.RESET_ALL)
 
     def registrar_asignatura(self):
         while True:
@@ -145,10 +151,10 @@ class Asignatura:
 
                 if not self.nom_asign.isalpha():
                     raise ValueError(
-                       Fore.RED + "Nombre de la asignatura debe ser una cadena de texto" + Style.RESET_ALL)
+                        Fore.RED + "Nombre de la asignatura debe ser una cadena de texto" + Style.RESET_ALL)
                 if self.check_asignatura(self.nom_asign):
                     raise ValueError(
-                       Fore.GREEN + "La asignatura ya se encuentra registrada" + Style.RESET_ALL)
+                        Fore.GREEN + "La asignatura ya se encuentra registrada" + Style.RESET_ALL)
 
                 break
             except ValueError as e:
@@ -169,11 +175,26 @@ class Asignatura:
                 print(
                     Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
 
+        while True:
+            try:
+                self.semestre = int(
+                    input("Ingrese el semestre al que pertenece la asignatura"))
+
+                if self.semestre < 1 or self.semestre > 2:
+                    Fore.YELLOW + \
+                        ("El semestre al que pertenece la materia debe ser 1 o 2" + Style.RESET_ALL)
+                break
+
+            except ValueError:
+                print(
+                    Fore.RED + "Ingrese un dato válido para este campo" + Style.RESET_ALL)
+
         nueva_asignatura = {
             "nombre": self.nom_asign,
             "creditos": self.cant_cred,
             "costo_credito": self.cost_cred,
-            "valor_total": self.cant_cred*self.cost_cred
+            "valor_total": self.cant_cred*self.cost_cred,
+            "semestre": self.semestre
         }
 
         gestor_asignaturas = Gestor_Json(path_asignaturas)
