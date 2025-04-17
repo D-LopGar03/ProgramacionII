@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
-from pasajeros.class_pasajero_economico import Pasajero_Economico
-from pasajeros.class_pasajero_ejecutivo import Pasajero_Ejecutivo
-from pasajeros.class_pasajero_premium import Pasajero_Premium
+from tiquete.class_tiquete import Tiquete
+from tiquete.class_TiqueteEconomico import TiqueteEconomico
+from tiquete.class_TiqueteEjecutivo import TiqueteEjecutivo
+from tiquete.class_TiquetePremium import TiquetePremium
+from pasajeros.class_pasajero import Pasajero
 
 
 def crear_pasajero():
 
     tarifas = {
-        "economico": 150000,
-        "ejecutivo": 250000,
-        "premium": 500000
+        "economico": (150000, TiqueteEconomico),
+        "ejecutivo": (250000, TiqueteEjecutivo),
+        "premium": (500000, TiquetePremium)
     }
 
-    def pedir_pasajero(mensaje):
-        TIPO_PASAJERO = ["economico", "ejecutivo", "premium"]
+    def pedir_tiquete(mensaje):
+        TIPO_TIQUETE = ["economico", "ejecutivo", "premium"]
         while True:
             tipo = input(mensaje).strip().lower()
 
-            if tipo not in TIPO_PASAJERO:
-                print("Ingrese un tipo de pasajero válido.")
+            if tipo not in TIPO_TIQUETE:
+                print("Ingrese un tipo de tiquete válido.")
             else:
                 return tipo
 
@@ -72,15 +74,16 @@ def crear_pasajero():
                 return False
             print("Responda 'S' o 'N'.")
 
-    tipo = pedir_pasajero(
-        "Ingrese el tipo de pasajero 'economico', 'ejecutivo', 'premium': ")
-    identificacion = pedir_entero(
-        "Ingrese el número de identificación del pasajero: ", 1)
+    tipo = pedir_tiquete(
+        "Ingrese el tipo de tiquete 'economico', 'ejecutivo', 'premium': ")
+    identificacion = pedir_texto(
+        "Ingrese el número de identificación del pasajero: ")
     nombre = pedir_texto("Ingrese el nombre del pasajero: ")
     edad = pedir_entero("Ingrese la edad del pasajero: ", 0, 130)
     kilo_equipaje = pedir_float(
         "Ingrese los kilos del equipaje en KG: ", 0, 70)
-    costo_tiquete = tarifas[tipo]
+    costo_tiquete = tarifas[tipo][0]
+    print(f"El costo del tiquete es: ${costo_tiquete}")
     sexo = pedir_sexo("Ingrese el sexo del pasajero: ")
 
     if sexo == "F":
@@ -89,18 +92,21 @@ def crear_pasajero():
     else:
         embarazo = False
 
-    if tipo == "economico":
-        pasajero = Pasajero_Economico(
-            identificacion, nombre, edad, kilo_equipaje, costo_tiquete, sexo, embarazo)
-    elif tipo == "ejecutivo":
-        pasajero = Pasajero_Ejecutivo(
-            identificacion, nombre, edad, kilo_equipaje, costo_tiquete, sexo, embarazo)
-    else:  
-        pasajero = Pasajero_Premium(
-            identificacion, nombre, edad, kilo_equipaje, costo_tiquete, sexo, embarazo)
+    precio, clase_tiquete = tarifas[tipo]
+    pasajero = Pasajero(
+        identificacion=identificacion,
+        nombre=nombre,
+        edad=edad,
+        sexo=sexo,
+        embarazada=embarazo
+    )
+
+    tiquete = clase_tiquete(pasajero, precio, kilo_equipaje)
+    tiquete.embarazada = embarazo
+    
 
     print(
-        f"El valor total a pagar es de: ${pasajero.calcular_total_tiquete()}")
+        f"El valor total a pagar es de: ${tiquete.calcular_total()}")
 
 
 crear_pasajero()
