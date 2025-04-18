@@ -14,6 +14,11 @@ import geonamescache
 from unidecode import unidecode
 gc = geonamescache.GeonamesCache()
 
+
+vuelos = []
+tiquetes = []
+pasajeros = []
+
 def obtener_pais_ciudad(mensaje):
 
     while True:
@@ -52,7 +57,61 @@ def crear_vuelo():
         return
     fecha = input("Ingrese la fecha del vuelo (DD/MM/AAAA): ")
 
-    vuelo = Vuelo(origen, destino, fecha, codigo_vuelo)
+    vuelo = Vuelo(origen, destino, fecha, codigo_vuelo, tiquetes)
+    vuelos.append(vuelo)
+    print(f"Vuelo creado: {vuelo}")
 
-    print(vuelo)
+def crear_tiquete():
 
+    if len(pasajeros) == 0:
+        print("Debe de crear al menos un pasajero.")
+        return
+
+    print("Seleccione el tipo de tiquete:")
+    print("1. Tiquete Económico")
+    print("2. Tiquete Ejecutivo")
+    print("3. Tiquete Premium")
+    tipo_tiquete = input("Seleccione una opción: ")
+
+    if tipo_tiquete not in ['1', '2', '3']:
+        print("Opción no válida.")
+        return
+
+    pasajero = pasajeros[0]  # Asignar el primer pasajero por simplicidad
+    costo_base = float(input("Ingrese el costo base del tiquete: "))
+    kilos_equipaje = float(input("Ingrese los kilos de equipaje: "))
+
+    if tipo_tiquete == '1':
+        tiquete = TiqueteEconomico(pasajero, costo_base, kilos_equipaje)
+    elif tipo_tiquete == '2':
+        tiquete = TiqueteEjecutivo(pasajero, costo_base, kilos_equipaje)
+    else:
+        tiquete = TiquetePremium(pasajero, costo_base, kilos_equipaje)
+
+    tiquetes.append(tiquete)
+    print(f"Tiquete creado: {tiquete}")
+
+def main():
+    while True:
+        print("\nOpciones:")
+        print("1. Crear vuelo")
+        print("2. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == '1':
+
+            if len(tiquetes) == 0:
+                print("Debe de vender al menos un tiquete.")
+                
+
+            crear_vuelo()
+        elif opcion == '2':
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+
+if __name__ == "__main__":
+    main()
+
+
+    
