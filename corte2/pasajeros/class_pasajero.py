@@ -5,6 +5,26 @@ class Pasajero:
         self.__edad = edad
         self.__sexo = sexo
         self.__embarazada = embarazada
+        self.__tiquete = None
+
+
+    @property
+    def tiquete(self):
+       
+        return self.__tiquete
+    
+    @tiquete.setter
+    def tiquete(self, nuevo_tiquete):
+        
+        if self.__tiquete is not None and self.__tiquete != nuevo_tiquete:
+            antiguo_tiquete = self.__tiquete
+            self.__tiquete = None
+            antiguo_tiquete.pasajero = None 
+            
+        self.__tiquete = nuevo_tiquete
+        
+        if nuevo_tiquete is not None and nuevo_tiquete.pasajero != self:
+            nuevo_tiquete.pasajero = self
     
     @property
     def identificacion(self):

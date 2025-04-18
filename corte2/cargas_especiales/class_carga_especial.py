@@ -1,32 +1,40 @@
-from pasajeros.class_pasajero import Pasajero
-
+from abc import ABC, abstractmethod
 
 class Carga_Especial:
 
     @property
     def tipo(self):
-        return self._tipo
+        return self.__tipo
     @tipo.setter
     def tipo(self, tipo):
-        self._tipo = tipo
+        self.__tipo = tipo
     @property
     def peso(self):
-        return self._peso
+        return self.__peso
     @peso.setter
     def peso(self, peso):
-        self._peso = peso
+        self.__peso = peso
 
-    def __init__(self, tipo, peso):
+    @property
+    def costo_base(self):
+        return self.__costo_base
+    @costo_base.setter
+    def costo_base(self, costo_base):
+        self.__costo_base = costo_base
 
-        self._tipo = tipo
-        self._peso = peso
+    def __init__(self, tipo, peso, costo_base):
 
-    def calcular_costo(self):
-        if self.tipo == "bicicleta":
-            return self.peso * 10000
-        elif self.tipo == "perro":
-            return self.peso * 20000
-        elif self.tipo == "gato":
-            return self.peso * 15000
-        else:
-            return 0
+        if tipo not in self.tipo_permitido:
+            raise ValueError(f"Tipo de carga especial '{tipo}' no permitido.")
+        if peso <= 0:
+            raise ValueError("El peso debe ser mayor a cero.")
+
+        self.__tipo = tipo
+        self.__peso = peso
+        self.__costo_base = costo_base
+
+
+
+    @abstractmethod
+    def calcular_costo_carga_especial(self):
+        pass

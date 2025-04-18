@@ -1,5 +1,10 @@
 from tiquete.class_tiquete import Tiquete
 from pasajeros.class_pasajero import Pasajero
+from cargas_especiales.class_carga_especial import Carga_Especial
+from cargas_especiales.class_bicicleta import Bicicleta
+from cargas_especiales.class_perro import Perro
+from cargas_especiales.class_gato import Gato
+from cargas_especiales.class_otro import Otro
 
 class TiqueteEconomico(Tiquete):
     KILOS_GRATIS = 10
@@ -22,3 +27,6 @@ class TiqueteEconomico(Tiquete):
     def calcular_costo_equipaje(self):
         exceso = self.__kilos_equipaje - self.KILOS_GRATIS
         return exceso * self.COSTO_POR_KILO
+    
+    def calcular_costo_carga_especial(self):
+        return Carga_Especial.calcular_costo_carga_especial()
