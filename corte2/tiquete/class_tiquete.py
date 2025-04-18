@@ -51,6 +51,10 @@ class Tiquete(ABC):
 
         return subtotal * descuento
 
+    def agregar_carga_especial(self, carga: Carga_Especial):
+        
+        self._carga_especial.append(carga)
+
 
     def calcular_total(self):
         costo_equipaje = self.calcular_costo_equipaje()

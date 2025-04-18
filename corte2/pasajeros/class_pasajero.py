@@ -84,3 +84,7 @@ class Pasajero:
     def es_adulto_mayor(self):
         return self.edad >= 65
     
+
+
+    def __str__(self):
+        return f"Pasajero(Identificación: {self.identificacion}, Nombre: {self.nombre.title()}, Edad: {self.edad}, Sexo: {self.sexo}, Embarazada: {self.embarazada})"

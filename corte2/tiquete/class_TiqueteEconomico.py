@@ -29,4 +29,4 @@ class TiqueteEconomico(Tiquete):
         return exceso * self.COSTO_POR_KILO
     
     def calcular_costo_carga_especial(self):
-        return Carga_Especial.calcular_costo_carga_especial()
+        return sum(carga.calcular_costo_carga_especial() for carga in self._carga_especial)
