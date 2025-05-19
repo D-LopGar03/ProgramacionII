@@ -1,3 +1,5 @@
+# 1
+
 from enum import Enum
 import sys
 from typing import List, Dict, Optional, Tuple
@@ -11,6 +13,14 @@ class Genero(Enum):
     MASCULINO = 'M'
     FEMENINO = 'F'
     OTRO = 'O'
+
+class Estrato(Enum):
+    UNO = 1
+    DOS = 2
+    TRES = 3
+    CUATRO = 4
+    CINCO = 5
+    SEIS = 6
 
 class TipoCarga(Enum):
     BICICLETA = 1
@@ -106,6 +116,9 @@ class Tiquete:
     
     def calcular_total(self) -> float:
         costo_equipaje = self.calcular_costo_equipaje()
+
+        
+        
         return self.pasajero.aplicar_descuentos(self.costo_base + costo_equipaje)
     
     def __str__(self):
@@ -133,12 +146,17 @@ class PaqueteTuristico(Tiquete):
         return f"{super().__str__()} (Paquete con {self.descuento*100:.0f}% descuento)"
 
 class Pasajero:
-    def __init__(self, identificacion: str, nombre: str, edad: int, genero: Genero, embarazada: bool = False):
+    def __init__(self, identificacion: str, nombre: str, edad: int, genero: Genero, embarazada: bool = False, estrato: str = ""):
         self.identificacion = identificacion
         self.nombre = nombre
         self.edad = edad
         self.genero = genero
         self.embarazada = embarazada
+        self.estrato = estrato
+
+
+    def es_estrato_uno(self) -> bool:
+        return self.estrato == Estrato.UNO
     
     def es_infante(self) -> bool:
         return 0 <= self.edad <= 13
@@ -149,6 +167,9 @@ class Pasajero:
     def aplicar_descuentos(self, costo_base: float) -> float:
         descuento = 0.0
         
+        if self.es_estrato_uno():
+            descuento += 0.10
+
         if self.es_infante():
             descuento += 0.07
         
@@ -192,6 +213,7 @@ class Aerolinea:
     def hacer_checkin(self, tiquete: Tiquete, equipajes: List[Equipaje]) -> float:
         for equipaje in equipajes:
             tiquete.agregar_equipaje(equipaje)
+            
         return tiquete.calcular_costo_equipaje()
     
     def devolver_tiquete(self, tiquete: Tiquete) -> bool:
@@ -363,11 +385,17 @@ def gestion_pasajeros() -> Pasajero:
     
     genero = genero_map[genero_opcion]
     embarazada = False
+    estrato_opcion = input("Estrato (UNO-SEIS): ").upper()
+    estrato_map = {"UNO": Estrato(1), "DOS": Estrato(2), "TRES": Estrato(3), "CUATRO": Estrato(4), "CINCO": Estrato(5), "SEIS": Estrato(6)}
+    if estrato_opcion not in estrato_map:
+        print("Opción no válida.")
+        return None
+    estrato = estrato_map[estrato_opcion]
     
     if genero == Genero.FEMENINO:
         embarazada = input("¿Está embarazada? (s/n): ").lower() == 's'
     
-    return Pasajero(identificacion, nombre, edad, genero, embarazada)
+    return Pasajero(identificacion, nombre, edad, genero, embarazada, estrato)
 
 def venta_tiquetes(aerolinea: Aerolinea):
     if not aerolinea.vuelos:
