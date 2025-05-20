@@ -253,6 +253,9 @@ def reportes_asignaturas():
 
             print("1. Estudiantes por asignatura")
             print("2. Total recaudado por asignatura")
+            print("3. Asignatura con mayor recaudo")
+            print("4. Promedio de costos por asignatura")
+            print("x. Menú principal")
 
             opcion = input("Seleccione una opción: ")
 
@@ -271,7 +274,7 @@ def reportes_asignaturas():
 
             elif opcion == "2":
                 limpiar_pantalla()
-                conteo = lista_asignaturas.recaudo_por_asignatura(lista_estudiantes)
+                conteo = lista_estudiantes.recaudo_por_asignatura()
                 if not conteo:
                     print("No hay asignaturas registrados.")
                 else:
@@ -279,6 +282,22 @@ def reportes_asignaturas():
                     for asignatura, precio in conteo.items():
                         print(f"{asignatura}: ${precio}")
 
+
+            elif opcion == "3":
+                limpiar_pantalla()
+                asignatura_mayor, recaudo = lista_asignaturas.asignatura_mayor_recaudo(lista_estudiantes)
+                if asignatura_mayor is not None:
+                    print(f"Asignatura con mayor recaudo: {asignatura_mayor} con ${recaudo}")
+                else:
+                    print("No hay estudiantes registrados.")
+            elif opcion == "4":
+
+                limpiar_pantalla()
+                promedio = lista_asignaturas.promedio_costo_asignatura()
+                if promedio > 0:
+                    print(f"Promedio de costos por asignatura: ${promedio:.2f}\n")
+                else:
+                    print("No hay asignaturas registradas.")
                 
                 
                 

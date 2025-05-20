@@ -17,6 +17,17 @@ class ListaEstudiante(ListaGenerica):
             actual = actual.siguiente
         return conteo
 
+    def recaudo_por_asignatura(self):
+        conteo = {}
+        actual = self._head
+        while actual:
+            asign = actual.dato.asignatura
+            if asign in conteo:
+                conteo[asign] += actual.dato.valor_pagar
+            else:
+                conteo[asign] = actual.dato.valor_pagar
+            actual = actual.siguiente
+        return conteo
     
 
     def eliminar_estudiante_nombre(self, nombre):

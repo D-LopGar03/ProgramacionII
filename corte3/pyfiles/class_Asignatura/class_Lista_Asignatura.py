@@ -32,18 +32,17 @@ class ListaAsignatura(ListaGenerica):
         asignatura_mayor = max(recaudos, key=recaudos.get)
         return asignatura_mayor, recaudos[asignatura_mayor]
 
+    def promedio_costo_asignatura(self):
 
-    def recaudo_por_asignatura(self, lista_estudiantes):
-        conteo = {}
-        actual = self._head
-        while actual:
-            asign = actual.dato.asignatura
-            if asign in conteo:
-                conteo[asign] += actual.dato.valor_pagar
-            else:
-                conteo[asign] = actual.dato.valor_pagar
-            actual = actual.siguiente
-        return conteo
+        nodos = self.contar_nodos()
+        costos = 0
+
+        for i in range(nodos):
+
+            costos += self._head.dato.total_asign
+            self._head = self._head.siguiente
+        return costos / nodos if nodos > 0 else 0
+
 
 
     def buscar_por_nombre(self, nombre_buscar):
