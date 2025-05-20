@@ -7,7 +7,6 @@ from pyfiles.class_Asignatura.Asigantura import Asignatura
 from pyfiles.class_Asignatura.class_Lista_Asignatura import ListaAsignatura
 from pyfiles.class_Estudiante.Estudiante import Estudiante
 from pyfiles.class_Estudiante.class_Lista_Estudiante import ListaEstudiante
-from pyfiles.class_Lista.class_Lista import ListaGenerica
 
 lista_asignaturas = ListaAsignatura()
 lista_estudiantes = ListaEstudiante()
