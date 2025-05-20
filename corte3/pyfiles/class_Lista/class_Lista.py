@@ -7,6 +7,17 @@ class ListaGenerica(ABC):
     def __init__(self):
         self._head = None
 
+
+    def contar_nodos(self):
+        contador = 0
+        nodo_actual = self._head
+
+        while nodo_actual is not None:
+            contador += 1
+            nodo_actual = nodo_actual.siguiente
+
+        return contador
+
     def agregar(self, dato):
         nuevo_nodo = Nodo(dato)
 
@@ -41,12 +52,6 @@ class ListaGenerica(ABC):
         
         return None
 
-
-
-    @abstractmethod
-    def eliminar_asignatura_nombre(self, nombre_a_eliminar):
-        pass
-   
 
     @abstractmethod
     def troncar_posicion(self):

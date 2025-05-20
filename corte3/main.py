@@ -3,7 +3,6 @@
 import sys
 sys.dont_write_bytecode = True
 
-
 from pyfiles.class_Asignatura.Asigantura import Asignatura
 from pyfiles.class_Asignatura.class_Lista_Asignatura import ListaAsignatura
 from pyfiles.class_Estudiante.Estudiante import Estudiante
@@ -26,6 +25,8 @@ def gestion_asignaturas():
             print("4. Eliminar asignatura por nombre")
             print("5. Buscar asignatura por posición")
             print("6. Eliminar asignatura por posición")
+            print("7. Estudiantes por asignatura")
+            print("8. Total recaudado por asignatura")
             
             print("x. Menú principal")
             print("ctrl + c. Salir")
@@ -101,7 +102,15 @@ def gestion_asignaturas():
                             
                 except ValueError:
                     print("Error: Debe ingresar un número entero válido")
-            
+
+
+            elif opcion == "7":
+                reporte = lista_asignaturas.generar_reporte_estudiantes_por_asignatura()
+                for asignatura, cantidad in reporte.items():
+                    print(f"{asignatura}: {cantidad} estudiantes")
+
+
+
             elif opcion == "x":
                 limpiar_pantalla()
                 break
@@ -110,6 +119,7 @@ def gestion_asignaturas():
 
         except KeyboardInterrupt:
             print(f"\nSaliendo del programa por interrupción del teclado...")
+            sys.exit(0)
             break
 
         except ValueError as e:
@@ -139,16 +149,33 @@ def gestion_estudiantes():
                 genero = input("Ingrese el género del estudiante: ")
                 edad = int(input("Ingrese la edad del estudiante: "))
                 estrato = int(input("Ingrese el estrato del estudiante (1-6): "))
+                asignatura = input("Ingrese la asignatura del estudiante: ")
+                                
+                if lista_asignaturas.buscar_por_nombre(asignatura) is None:
+                    print(f"Asignatura '{asignatura}' no encontrada. No se puede agregar el estudiante.")
+                    continue
+                valor_pagar = lista_asignaturas.buscar_por_nombre(asignatura).dato.total_asign
+
                 
-                estudiante = Estudiante(nombre, genero, edad, estrato)
+                
+                estudiante = Estudiante(nombre, genero, edad, estrato, asignatura, valor_pagar)
                 lista_estudiantes.agregar(estudiante)
                 limpiar_pantalla()
                 print(f"Estudiante '{nombre}' agregado.")
 
 
+            elif opcion == "2":
+                limpiar_pantalla()
+                if lista_estudiantes._head is None:
+                    print("No hay estudiantes registrados.")
+                    continue
+                print("Lista de estudiantes:\n")
+                
+                lista_estudiantes.mostrar()
 
 
-            if opcion == "x":
+
+            elif opcion == "x":
                 limpiar_pantalla()
                 break
             else:

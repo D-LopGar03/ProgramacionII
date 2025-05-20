@@ -5,4 +5,8 @@ class ListaEstudiante(ListaGenerica):
         super().__init__()
         self._head = None
 
+    
 
+    def troncar_posicion(self):
+        pass
+    
