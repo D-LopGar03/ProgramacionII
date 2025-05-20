@@ -57,17 +57,6 @@ class ListaAsignatura(ListaGenerica):
         nodo_actual.siguiente = nodo_actual.siguiente.siguiente
         return True
 
-
-    def generar_reporte_estudiantes_por_asignatura(self):
-        reporte = {}
-        actual = self._head
-        while actual:
-            asignatura = actual.dato
-            reporte[asignatura.nom_asign] = asignatura.total_estudiantes()
-            actual = actual.siguiente
-        return reporte
-    
-
          
     def troncar_posicion(self):
         pass

@@ -7,7 +7,7 @@ class Asignatura:
         self.cant_cred = cant_cred
         self.cost_cred = cost_cred
         self.semestre = semestre
-        self.total_asign = self.cant_cred * self.cost_cred
+        self.valor_total = self.cant_cred * self.cost_cred
 
 
     def total_recaudado(self):

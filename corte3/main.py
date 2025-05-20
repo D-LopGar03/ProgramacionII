@@ -25,8 +25,6 @@ def gestion_asignaturas():
             print("4. Eliminar asignatura por nombre")
             print("5. Buscar asignatura por posición")
             print("6. Eliminar asignatura por posición")
-            print("7. Estudiantes por asignatura")
-            print("8. Total recaudado por asignatura")
             
             print("x. Menú principal")
             print("ctrl + c. Salir")
@@ -105,9 +103,14 @@ def gestion_asignaturas():
 
 
             elif opcion == "7":
-                reporte = lista_asignaturas.generar_reporte_estudiantes_por_asignatura()
-                for asignatura, cantidad in reporte.items():
-                    print(f"{asignatura}: {cantidad} estudiantes")
+                reporte = lista_asignaturas.contar_estudiantes_por_asignatura()
+                
+                if len(reporte) == 0:
+                    limpiar_pantalla()
+                    print("Ninguna asignatura registrada.")
+                else: 
+                    for asignatura, cantidad in reporte.items():
+                        print(f"{asignatura}: {cantidad} estudiantes")
 
 
 
@@ -146,10 +149,15 @@ def gestion_estudiantes():
             if opcion == "1":
                 limpiar_pantalla()
                 nombre = input("Ingrese el nombre del estudiante: ")
-                genero = input("Ingrese el género del estudiante: ")
+                genero = input("Ingrese el género del estudiante: ").upper()
+                while genero not in {'M', 'F'}:
+                    print("Error: Género inválido. Debe ser 'M' o 'F'.")
+                    genero = input("Ingrese el género del estudiante: ").upper()
+
+                    
                 edad = int(input("Ingrese la edad del estudiante: "))
                 estrato = int(input("Ingrese el estrato del estudiante (1-6): "))
-                asignatura = input("Ingrese la asignatura del estudiante: ")
+                asignatura = input("Ingrese la asignatura del estudiante: ").upper()
                                 
                 if lista_asignaturas.buscar_por_nombre(asignatura) is None:
                     print(f"Asignatura '{asignatura}' no encontrada. No se puede agregar el estudiante.")
@@ -189,11 +197,56 @@ def gestion_estudiantes():
             print(f"Error: {e}. Por favor, ingrese un valor válido.")
 
 
+def reportes_asignaturas():
+
+    while True:
+        
+        try:
+
+            print("1. Estudiantes por asignatura")
+            print("2. Total recaudado por asignatura")
+
+            opcion = input("Seleccione una opción: ")
+
+
+            if opcion == "1":
+                limpiar_pantalla()
+                conteo = lista_estudiantes.contar_estudiantes_por_asignatura()
+                if not conteo:
+                    print("No hay estudiantes registrados.")
+                else:
+                    print("Estudiantes por asignatura:\n")
+                    for asignatura, cantidad in conteo.items():
+                        print(f"{asignatura}: {cantidad} estudiante(s)")
+
+                
+                
+                
+            elif opcion == "x":
+                limpiar_pantalla()
+                break
+            else:
+                print("Opción no válida. Intente nuevamente.")
+
+        except KeyboardInterrupt:
+            print(f"\nSaliendo del programa por interrupción del teclado...")
+            break
+
+        except ValueError as e:
+            print(f"Error: {e}. Por favor, ingrese un valor válido.")
+
+
+
+    
+
+    pass
+
 def main():
     while True:
         try:
             print("1. Gestión de Asignaturas")
             print("2. Gestión de Estudiantes")
+            print("3. Reportes")
             print("ctrl + c. Salir")
 
             opcion = input("Seleccione una opción: ")
@@ -205,6 +258,11 @@ def main():
             elif opcion == "2":
                 limpiar_pantalla()
                 gestion_estudiantes()
+
+            elif opcion == "3":
+                limpiar_pantalla()
+                reportes_asignaturas()
+
 
             else:
                 print("Opción no válida. Intente nuevamente.")
