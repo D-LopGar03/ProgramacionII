@@ -255,6 +255,9 @@ def reportes_asignaturas():
             print("2. Total recaudado por asignatura")
             print("3. Asignatura con mayor recaudo")
             print("4. Promedio de costos por asignatura")
+            print("5. Total recaudado por estrato (1, 2o 3)")
+            print("6. Total recaudado entre todas las asignaturas")
+            print("7. Cuantos estudiantes hay de estrato 1")
             print("x. Menú principal")
 
             opcion = input("Seleccione una opción: ")
@@ -299,8 +302,34 @@ def reportes_asignaturas():
                 else:
                     print("No hay asignaturas registradas.")
                 
+            elif opcion == "5":
+                limpiar_pantalla()
+                estrato = int(input("Ingrese el estrato (1-3) para calcular el total recaudado: "))
+                if estrato not in [1, 2, 3]:
+                    print("Error: El estrato debe ser 1, 2 o 3.")
+                    continue
+                total_recaudado = lista_estudiantes.total_recaudado_por_estrato(estrato)
+                print(f"Total recaudado por estudiantes de estrato {estrato}: ${total_recaudado:.2f}")
                 
-                
+
+
+            elif opcion == "6":
+                limpiar_pantalla()
+                total_recaudado = lista_estudiantes.recaudo_total()
+                if total_recaudado > 0:
+                    print(f"Total recaudado entre todas las asignaturas: ${total_recaudado:.2f}")
+                else:
+                    print("No hay estudiantes registrados.")
+
+
+            elif opcion == "7":
+                limpiar_pantalla()
+                conteo = lista_estudiantes.cuantos_estrato_uno()
+                if not conteo:
+                    print("No hay estudiantes registrados.")
+                else:
+                    print(f"Estudiantes de estrato 1: {conteo}\n")
+
             elif opcion == "x":
                 limpiar_pantalla()
                 break
