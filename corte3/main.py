@@ -343,11 +343,6 @@ def reportes_asignaturas():
             print(f"Error: {e}. Por favor, ingrese un valor válido.")
 
 
-
-    
-
-    pass
-
 def main():
     while True:
         try:
