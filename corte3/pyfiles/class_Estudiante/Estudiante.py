@@ -44,10 +44,10 @@ class Estudiante:
     def __str__(self):
         genero_completo = Estudiante.GENEROS_VALIDOS[self.genero]
         return (
-            f"Estudiante: {self.nombre},\n"
+            f"[Estudiante: {self.nombre},\n"
             f"Género: {genero_completo},\n"
             f"Edad: {self.edad} años,\n"
             f"Estrato: {self.estrato},\n"
             f"Asignatura: {self.asignatura},\n"
-            f"Valor a pagar: ${self.valor_pagar}\n"
+            f"Valor a pagar: ${self.valor_pagar}\n]"
         )

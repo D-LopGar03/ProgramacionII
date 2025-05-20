@@ -1,6 +1,5 @@
 from pyfiles.class_Lista.class_Lista import ListaGenerica
 
-
 class ListaAsignatura(ListaGenerica):
     def __init__(self):
         super().__init__()
@@ -26,6 +25,25 @@ class ListaAsignatura(ListaGenerica):
         return False
     
 
+    def asignatura_mayor_recaudo(self, lista_estudiantes):
+        recaudos = lista_estudiantes.recaudo_por_asignatura()
+        if not recaudos:
+            return None
+        asignatura_mayor = max(recaudos, key=recaudos.get)
+        return asignatura_mayor, recaudos[asignatura_mayor]
+
+
+    def recaudo_por_asignatura(self, lista_estudiantes):
+        conteo = {}
+        actual = self._head
+        while actual:
+            asign = actual.dato.asignatura
+            if asign in conteo:
+                conteo[asign] += actual.dato.valor_pagar
+            else:
+                conteo[asign] = actual.dato.valor_pagar
+            actual = actual.siguiente
+        return conteo
 
 
     def buscar_por_nombre(self, nombre_buscar):
@@ -36,27 +54,6 @@ class ListaAsignatura(ListaGenerica):
             nodo_actual = nodo_actual.siguiente
         return None
     
-    def eliminar_asignatura_posicion(self, posicion):
-        if self._head is None:
-            return False
-        
-        if posicion == 0:
-            self._head = self._head.siguiente
-            return True
-        
-        nodo_actual = self._head
-        contador = 0
-        
-        while nodo_actual is not None and contador < posicion - 1:
-            nodo_actual = nodo_actual.siguiente
-            contador += 1
-        
-        if nodo_actual is None or nodo_actual.siguiente is None:
-            return False
-        
-        nodo_actual.siguiente = nodo_actual.siguiente.siguiente
-        return True
-
          
     def troncar_posicion(self):
         pass

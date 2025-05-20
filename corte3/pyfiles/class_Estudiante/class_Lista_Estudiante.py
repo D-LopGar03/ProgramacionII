@@ -19,6 +19,20 @@ class ListaEstudiante(ListaGenerica):
 
     
 
+    def eliminar_estudiante_nombre(self, nombre):
+        actual = self._head
+        anterior = None
+        while actual:
+            if actual.dato.nombre == nombre:
+                if anterior is None:
+                    self._head = actual.siguiente
+                else:
+                    anterior.siguiente = actual.siguiente
+                return True
+            anterior = actual
+            actual = actual.siguiente
+        return False
+
 
     def troncar_posicion(self):
         pass

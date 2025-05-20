@@ -53,6 +53,29 @@ class ListaGenerica(ABC):
         return None
 
 
+    def eliminar_por_posicion(self, posicion):
+        if self._head is None:
+            return False
+        
+        if posicion == 0:
+            self._head = self._head.siguiente
+            return True
+        
+        nodo_actual = self._head
+        contador = 0
+        
+        while nodo_actual is not None and contador < posicion - 1:
+            nodo_actual = nodo_actual.siguiente
+            contador += 1
+        
+        if nodo_actual is None or nodo_actual.siguiente is None:
+            return False
+        
+        nodo_actual.siguiente = nodo_actual.siguiente.siguiente
+        return True
+
+
+
     @abstractmethod
     def troncar_posicion(self):
         pass

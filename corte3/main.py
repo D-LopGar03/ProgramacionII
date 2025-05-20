@@ -7,6 +7,7 @@ from pyfiles.class_Asignatura.Asigantura import Asignatura
 from pyfiles.class_Asignatura.class_Lista_Asignatura import ListaAsignatura
 from pyfiles.class_Estudiante.Estudiante import Estudiante
 from pyfiles.class_Estudiante.class_Lista_Estudiante import ListaEstudiante
+from pyfiles.class_Lista.class_Lista import ListaGenerica
 
 lista_asignaturas = ListaAsignatura()
 lista_estudiantes = ListaEstudiante()
@@ -93,7 +94,7 @@ def gestion_asignaturas():
                     else:
                         posicion_real = posicion_usuario - 1
                         
-                        if lista_asignaturas.eliminar_asignatura_posicion(posicion_real):
+                        if lista_asignaturas.eliminar_por_posicion(posicion_real):
                             print(f"Asignatura en posición {posicion_usuario} eliminada correctamente")
                         else:
                             print(f"No existe asignatura en la posición {posicion_usuario}")
@@ -148,7 +149,7 @@ def gestion_estudiantes():
             
             if opcion == "1":
                 limpiar_pantalla()
-                nombre = input("Ingrese el nombre del estudiante: ")
+                nombre = input("Ingrese el nombre del estudiante: ").title()
                 genero = input("Ingrese el género del estudiante: ").upper()
                 while genero not in {'M', 'F'}:
                     print("Error: Género inválido. Debe ser 'M' o 'F'.")
@@ -181,6 +182,53 @@ def gestion_estudiantes():
                 
                 lista_estudiantes.mostrar()
 
+
+            elif opcion == "3":
+
+                limpiar_pantalla()
+                nombre = input("Ingrese el nombre del estudiante a buscar: ").title()
+                resultado = lista_asignaturas.buscar_por_nombre(nombre)
+                if resultado is not None:
+                    print(f"Asignatura encontrada: {resultado.dato}")
+                else:
+                    print(f"Asignatura '{nombre}' no encontrada.")
+
+            elif opcion == "4":
+                limpiar_pantalla()
+                nombre = input("Ingrese el nombre del estudiante a eliminar: ").title()
+                if not lista_estudiantes.eliminar_estudiante_nombre(nombre):
+                    print(f"Estudiante '{nombre}' no encontrado para eliminar.")
+                else:
+                    limpiar_pantalla()
+                    print(f"Estudiante '{nombre}' eliminado.")
+            elif opcion == "5":
+                limpiar_pantalla()
+               
+                posicion = int(input("Ingrese la posición del estudiante a buscar: "))
+                resultado = lista_estudiantes.buscar_por_posicion(posicion)
+                if resultado is not None:
+                    print(f"Estudiante en posición {posicion}: {resultado}")
+                else:
+                    print(f"No hay estudiante en la posición {posicion}.")
+
+            elif opcion == "6":
+
+                limpiar_pantalla()
+                try:
+                    posicion_usuario = int(input("Ingrese la posición del estudiante a eliminar (comienza en 1): "))
+                    
+                    if posicion_usuario < 1:
+                        print("Error: La posición debe ser mayor a 0")
+                    else:
+                        posicion_real = posicion_usuario - 1
+                        
+                        if lista_estudiantes.eliminar_por_posicion(posicion_real):
+                            print(f"Asignatura en posición {posicion_usuario} eliminada correctamente")
+                        else:
+                            print(f"No existe asignatura en la posición {posicion_usuario}")
+                            
+                except ValueError:
+                    print("Error: Debe ingresar un número entero válido")
 
 
             elif opcion == "x":
@@ -218,6 +266,18 @@ def reportes_asignaturas():
                     print("Estudiantes por asignatura:\n")
                     for asignatura, cantidad in conteo.items():
                         print(f"{asignatura}: {cantidad} estudiante(s)")
+
+
+
+            elif opcion == "2":
+                limpiar_pantalla()
+                conteo = lista_asignaturas.recaudo_por_asignatura(lista_estudiantes)
+                if not conteo:
+                    print("No hay asignaturas registrados.")
+                else:
+                    print("Recaudo total por asignatura:\n")
+                    for asignatura, precio in conteo.items():
+                        print(f"{asignatura}: ${precio}")
 
                 
                 
