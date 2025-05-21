@@ -1,3 +1,5 @@
+from unidecode import unidecode
+
 class Estudiante:
 
     GENEROS_VALIDOS = {'M': 'Masculino', 'F': 'Femenino'}
@@ -20,6 +22,18 @@ class Estudiante:
             self.valor_pagar = round(valor_pagar, 2)
 
     @property
+    def nombre(self):
+        return self._nombre
+    
+
+    @nombre.setter
+    def nombre(self, nombre):
+        if len(nombre) == 0:
+            raise ValueError("El nombre no puede ser nulo")
+        self._nombre = nombre
+    
+
+    @property
     def genero(self):
         return self._genero
 
@@ -29,6 +43,18 @@ class Estudiante:
             self._genero = value
         else:
             raise ValueError("Género inválido. Debe ser 'M' o 'F'.")
+
+
+    @property
+    def edad(self):
+        return self._edad
+
+    @edad.setter
+    def edad(self, value):
+        if value < 13:
+            raise ValueError("El estudiante debe de tener como mínimo 13 años.")
+        self._edad = value
+
 
     @property
     def estrato(self):
@@ -40,6 +66,23 @@ class Estudiante:
             self._estrato = value
         else:
             raise ValueError("Estrato debe estar entre 1 y 6.")
+        
+
+    @property
+    def asignatura(self):
+        return self._asignatura
+
+    @asignatura.setter
+    def asignatura(self, value):
+        if isinstance(value, str):
+            value = unidecode(value).upper()
+            value = value.replace('1', 'I').replace('2', 'II').replace('3', 'III') \
+                         .replace('4', 'IV').replace('5', 'V')
+            self._asignatura = value
+        else:
+            raise TypeError("El nombre de la asignatura debe ser una cadena de texto.")
+
+    
 
     def __str__(self):
         genero_completo = Estudiante.GENEROS_VALIDOS[self.genero]

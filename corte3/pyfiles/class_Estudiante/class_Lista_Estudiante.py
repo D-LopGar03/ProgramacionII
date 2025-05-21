@@ -68,15 +68,28 @@ class ListaEstudiante(ListaGenerica):
         return total
     
 
-    def cuantos_estrato_uno(self):
-        contador = 0
+    def contar_estrato_uno_por_asignatura(self):
+        conteo = {}
         actual = self._head
         while actual:
-            if actual.dato.estrato == 1:
-                contador += 1
+            estudiante = actual.dato
+            if estudiante.estrato == 1:
+                asignatura = estudiante.asignatura
+                if asignatura in conteo:
+                    conteo[asignatura] += 1
+                else:
+                    conteo[asignatura] = 1
             actual = actual.siguiente
-        return contador
+        return conteo
 
+
+    def buscar_por_nombre(self, nombre_buscar):
+        nodo_actual = self._head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nombre == nombre_buscar:
+                return nodo_actual
+            nodo_actual = nodo_actual.siguiente
+        return None
 
     def troncar_posicion(self):
         pass

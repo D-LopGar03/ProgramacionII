@@ -1,4 +1,4 @@
-import unidecode
+from unidecode import unidecode
 
 
 class Asignatura:
@@ -20,7 +20,7 @@ class Asignatura:
     @nom_asign.setter
     def nom_asign(self, value):
         if isinstance(value, str):
-            value = unidecode.unidecode(value).upper()
+            value = unidecode(value).upper()
             value = value.replace('1', 'I').replace('2', 'II').replace('3', 'III') \
                          .replace('4', 'IV').replace('5', 'V')
             self._nom_asign = value
