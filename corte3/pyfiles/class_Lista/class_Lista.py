@@ -73,13 +73,4 @@ class ListaGenerica(ABC):
         
         nodo_actual.siguiente = nodo_actual.siguiente.siguiente
         return True
-
-
-
-    @abstractmethod
-    def troncar_posicion(self):
-        pass
-    
-
-    
     

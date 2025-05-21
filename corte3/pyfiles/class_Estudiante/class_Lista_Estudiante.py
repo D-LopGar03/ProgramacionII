@@ -90,7 +90,5 @@ class ListaEstudiante(ListaGenerica):
                 return nodo_actual
             nodo_actual = nodo_actual.siguiente
         return None
-
-    def troncar_posicion(self):
-        pass
+    
     

@@ -54,5 +54,3 @@ class ListaAsignatura(ListaGenerica):
         return None
     
          
-    def troncar_posicion(self):
-        pass
