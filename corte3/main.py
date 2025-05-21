@@ -18,11 +18,21 @@ def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def gestion_asignaturas():
+def cargar_datos_iniciales():
     asignatura1 = Asignatura("Matematicas", 3, 100000.0, 1)
     asignatura2 = Asignatura("Programacion", 4, 150000.0, 2)
     lista_asignaturas.agregar(asignatura1)
     lista_asignaturas.agregar(asignatura2)
+
+    alumno1 = Estudiante("Juan Perez", "M", 20, 3, "Matemáticas", 300000.0)
+    alumno2 = Estudiante("Maria Lopez", "F", 22, 1, "Programacion", 600000.0)
+    lista_estudiantes.agregar(alumno1)
+    lista_estudiantes.agregar(alumno2)
+
+
+
+def gestion_asignaturas():
+    
     while True:
         try:
             print("1. Agregar asignatura")
@@ -414,5 +424,5 @@ def main():
             limpiar_pantalla()
             print(Fore.RED + f"Error: Por favor, ingrese un valor válido." + Style.RESET_ALL)
 
-
+cargar_datos_iniciales()
 main()
