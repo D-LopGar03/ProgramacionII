@@ -21,14 +21,26 @@ def limpiar_pantalla():
 def cargar_datos_iniciales():
     asignatura1 = Asignatura("Matematicas", 3, 100000.0, 1)
     asignatura2 = Asignatura("Programacion", 4, 150000.0, 2)
+    asignatura3 = Asignatura("Historia", 2, 80000.0, 1)
+    asignatura4 = Asignatura("Ciencias", 3, 120000.0, 2)
+    asignatura5 = Asignatura("Ingles", 2, 90000.0, 1)
     lista_asignaturas.agregar(asignatura1)
     lista_asignaturas.agregar(asignatura2)
+    lista_asignaturas.agregar(asignatura3)
+    lista_asignaturas.agregar(asignatura4)
+    lista_asignaturas.agregar(asignatura5)
 
     alumno1 = Estudiante("Juan Perez", "M", 20, 3, "Matemáticas", 300000.0)
     alumno2 = Estudiante("Maria Lopez", "F", 22, 1, "Programacion", 600000.0)
+    alumno3 = Estudiante("Carla Benjumea", "F", 23, 2, "Historia", 80000.0)
     lista_estudiantes.agregar(alumno1)
     lista_estudiantes.agregar(alumno2)
+    lista_estudiantes.agregar(alumno3)
+    lista_estudiantes.mostrar()
 
+
+    lista_asignaturas.intercambiar_posiciones(2, 5)
+    
 
 
 def gestion_asignaturas():
@@ -41,6 +53,7 @@ def gestion_asignaturas():
             print("4. Eliminar asignatura por nombre")
             print("5. Buscar asignatura por posición")
             print("6. Eliminar asignatura por posición")
+            print("7. Intercambiar posiciones en lista (1->2, 2->1)")
             
             print("x. Menú principal")
             print("ctrl + c. Salir")
@@ -54,6 +67,10 @@ def gestion_asignaturas():
                 costo_credito = float(input("Ingrese el costo de los créditos: "))
                 semestre = int(input("Ingrese el semestre de la asignatura: "))
                 asignatura = Asignatura(nombre, creditos, costo_credito, semestre)
+                if lista_asignaturas.existe_en_lista(asignatura.nom_asign):
+                    limpiar_pantalla()
+                    print(Fore.RED + f"Asignatura '{nombre}' ya existe." + Style.RESET_ALL)
+                    continue
                 lista_asignaturas.agregar(asignatura)
                 limpiar_pantalla()
                 print(Fore.GREEN + f"Asignatura '{nombre}' agregada." + Style.RESET_ALL)
@@ -122,14 +139,30 @@ def gestion_asignaturas():
 
 
             elif opcion == "7":
-                reporte = lista_asignaturas.contar_estudiantes_por_asignatura()
                 
-                if len(reporte) == 0:
-                    limpiar_pantalla()
-                    print(Fore.RED + "Ninguna asignatura registrada." + Style.RESET_ALL)
-                else: 
-                    for asignatura, cantidad in reporte.items():
-                        print(Fore.GREEN + f"{asignatura}: {cantidad} estudiantes" + Style.RESET_ALL)
+                while True:
+                    try: 
+                        posicion1 = int(input("Ingrese la primera posición a intercambiar: "))
+                        posicion2 = int(input("Ingrese la segunda posición a intercambiar: "))
+                        
+                        if posicion1 < 0 or posicion2 < 0:
+                            print(Fore.RED + "Error: Las posiciones deben ser mayores a 0" + Style.RESET_ALL)
+                            continue
+                        if posicion1 == posicion2:
+                            print(Fore.RED + "Error: Las posiciones no pueden ser iguales" + Style.RESET_ALL)
+                            continue
+
+                        if lista_asignaturas.intercambiar_posiciones(posicion1, posicion2):
+                            limpiar_pantalla()
+                            print(Fore.GREEN + f"Asignaturas en posiciones {posicion1} y {posicion2} intercambiadas correctamente" + Style.RESET_ALL)
+                            break
+                        else:
+                            print(Fore.RED + f"No existe asignatura en la posición {posicion1} o {posicion2}" + Style.RESET_ALL)
+                        break
+                    except ValueError:
+                        limpiar_pantalla()
+                        print(Fore.RED + "Error: Debe ingresar un número entero válido" + Style.RESET_ALL)
+
 
 
 
@@ -159,6 +192,8 @@ def gestion_estudiantes():
             print("4. Eliminar estudiante por nombre")
             print("5. Buscar estudiante por posición")
             print("6. Eliminar estudiante por posición")
+            print("7. Intercambiar posiciones en lista (1->2, 2->1)")
+            print("8. Mover de posición inicial a final")
             
             print("x. Menú principal")
             print("ctrl + c. Salir")
@@ -175,7 +210,7 @@ def gestion_estudiantes():
 
                     
                 edad = int(input("Ingrese la edad del estudiante: "))
-                while edad < 13:
+                while edad < 13 or edad > 120:
                     print(Fore.RED + "Error: El estudiante debe de tener como mínimo 13 años." + Style.RESET_ALL)
                     edad = int(input("Ingrese la edad del estudiante: "))
 
@@ -257,6 +292,41 @@ def gestion_estudiantes():
                 except ValueError:
                     print(Fore.RED + "Error: Debe ingresar un número entero válido" + Style.RESET_ALL)
 
+            elif opcion == "7":
+                while True:
+                    try: 
+                        posicion1 = int(input("Ingrese la primera posición a intercambiar: "))
+                        posicion2 = int(input("Ingrese la segunda posición a intercambiar: "))
+                        
+                        if posicion1 < 0 or posicion2 < 0:
+                            print(Fore.RED + "Error: Las posiciones deben ser mayores a 0" + Style.RESET_ALL)
+                            continue
+                        if posicion1 == posicion2:
+                            print(Fore.RED + "Error: Las posiciones no pueden ser iguales" + Style.RESET_ALL)
+                            continue
+
+                        if lista_asignaturas.intercambiar_posiciones(posicion1, posicion2):
+                            limpiar_pantalla()
+                            print(Fore.GREEN + f"Asignaturas en posiciones {posicion1} y {posicion2} intercambiadas correctamente" + Style.RESET_ALL)
+                            break
+                        else:
+                            print(Fore.RED + f"No existe asignatura en la posición {posicion1} o {posicion2}" + Style.RESET_ALL)
+                        break
+                    except ValueError:
+                        limpiar_pantalla()
+                        print(Fore.RED + "Error: Debe ingresar un número entero válido" + Style.RESET_ALL)
+
+
+            elif opcion == "8":
+                limpiar_pantalla()
+                posicion1 = 1
+                posicion2 = lista_estudiantes.contar_nodos()
+
+                if lista_estudiantes.posicion_inicial_final(posicion1, posicion2):
+                    print(Fore.GREEN + f"Estudiante en posición {posicion1} movido a la posición {posicion2}." + Style.RESET_ALL)
+                else:
+                    print(Fore.RED + f"No existe estudiante en la posición {posicion1}." + Style.RESET_ALL)
+                lista_estudiantes.mostrar()
 
             elif opcion == "x":
                 limpiar_pantalla()

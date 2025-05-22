@@ -46,7 +46,7 @@ class ListaGenerica(ABC):
         
         while actual is not None:
             if contador == posicion:
-                return actual.dato
+                return actual
             contador += 1
             actual = actual.siguiente
         
@@ -74,3 +74,33 @@ class ListaGenerica(ABC):
         nodo_actual.siguiente = nodo_actual.siguiente.siguiente
         return True
     
+
+
+    def intercambiar_posiciones(self, pos1, pos2):
+        if pos1 == pos2:
+            return
+        
+        nodo1 = self.buscar_por_posicion(pos1)
+        nodo2 = self.buscar_por_posicion(pos2)
+        
+        if nodo1 is None or nodo2 is None:
+            return
+        
+        nodo1.dato, nodo2.dato = nodo2.dato, nodo1.dato
+
+        return True
+    
+
+    def posicion_inicial_final(self, pos1, pos2):
+        if pos1 == pos2:
+            return
+        
+        nodo1 = self.buscar_por_posicion(pos1)
+        nodo2 = self.buscar_por_posicion(pos2)
+        
+        if nodo1 is None or nodo2 is None:
+            return
+        
+        nodo1.dato, nodo2.dato = nodo2.dato, nodo1.dato
+
+        return True

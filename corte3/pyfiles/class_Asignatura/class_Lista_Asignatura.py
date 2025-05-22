@@ -44,6 +44,14 @@ class ListaAsignatura(ListaGenerica):
         return costos / nodos if nodos > 0 else 0
 
 
+    def existe_en_lista(self, nombre_buscar):
+        nodo_actual = self._head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nom_asign == nombre_buscar:
+                return True
+            nodo_actual = nodo_actual.siguiente
+        return False
+
 
     def buscar_por_nombre(self, nombre_buscar):
         nodo_actual = self._head

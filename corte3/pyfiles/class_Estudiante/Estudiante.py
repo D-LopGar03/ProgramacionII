@@ -30,6 +30,7 @@ class Estudiante:
     def nombre(self, nombre):
         if len(nombre) == 0:
             raise ValueError("El nombre no puede ser nulo")
+        
         self._nombre = nombre
     
 
@@ -51,8 +52,8 @@ class Estudiante:
 
     @edad.setter
     def edad(self, value):
-        if value < 13:
-            raise ValueError("El estudiante debe de tener como mínimo 13 años.")
+        if value < 13 or value > 120:
+            raise ValueError("El estudiante debe de tener como mínimo 13 años y menos de 120.")
         self._edad = value
 
 
